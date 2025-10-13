@@ -10,4 +10,9 @@ class JobController extends Controller
     {
         return "Daftar Lowongan Kerja";
     }
+
+    public function adminIndex()
+    {
+        return "Halaman Admin - Kelola Lowongan Kerja";
+    }
 }
