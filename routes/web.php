@@ -27,7 +27,7 @@ Route::get('/hello', function () {
     return "Halo, ini halaman percobaan route!";
 });
 
-Route::get('/jobs', [JobController::class, 'index']);
+Route::resource('jobs', JobController::class)->middleware(['auth', 'isAdmin']);
 
 Route::get('/admin', function () {
     return "Halaman Admin";
