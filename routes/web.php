@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +18,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::get('/hello', function () {
+    return "Halo, ini halaman percobaan route!";
+});
+
+Route::get('/jobs', [JobController::class, 'index']);
+
+Route::get('/admin', function () {
+    return "Halaman Admin";
+})->middleware(['auth', 'isAdmin']);
