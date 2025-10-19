@@ -12,7 +12,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <p class="text-lg font-medium text-gray-700">Kelola lowongan kerja yang tersedia.</p>
                         <a href="{{ route('jobs.create') }}"
-                           class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
+                           class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold shadow transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
                             Tambah Lowongan
                         </a>
                     </div>
@@ -47,18 +47,36 @@
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-700">
                                             <div class="flex items-center gap-2">
+                                                <a href="{{ route('jobs.show', $job->id) }}"
+                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                    Show
+                                                </a>
+                                                {{-- Jika Admin --}}
+                                                @if(Auth::check() && Auth::user()->role === 'admin')
+                                                <a href="{{ route('applications.index', $job->id) }}"
+                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                    Daftar Pelamar
+                                                </a>
                                                 <a href="{{ route('jobs.edit', $job->id) }}"
-                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
                                                     Edit
                                                 </a>
                                                 <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Hapus data?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2">
+                                                        class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-3 py-1 text-xs font-semibold transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2">
                                                         Hapus
                                                     </button>
                                                 </form>
+                                                {{-- Jika User Biasa --}}
+                                                @elseif(Auth::check() && Auth::user()->role === 'user')
+                                                <form action="{{ route('apply.store', $job->id) }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <input type="file" name="cv" required>
+                                                    <button type="submit" class="btn btn-primary">Lamar</button>
+                                                </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

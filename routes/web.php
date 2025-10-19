@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,7 +28,14 @@ Route::get('/hello', function () {
     return "Halo, ini halaman percobaan route!";
 });
 
-Route::resource('jobs', JobController::class)->middleware(['auth', 'isAdmin']);
+Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->name('apply.store')->middleware('auth');
+Route::get('/jobs/{job}/applicants', [ApplicationController::class, 'index'])->name('applications.index')->middleware('isAdmin');
+Route::post('/jobs/import', [JobController::class, 'import'])->name('jobs.import')->middleware('isAdmin');
+Route::resource('jobs', JobController::class)->middleware(['auth', 'isAdmin'])->except(['index', 'show']);
+Route::resource('jobs', JobController::class)->middleware(['auth'])->only(['index', 'show']);
+Route::get('/applications/export', [ApplicationController::class, 'export'])->name('applications.export')->middleware('isAdmin');
+Route::resource('applications', ApplicationController::class)->middleware(['auth', 'isAdmin'])->except(['index', 'show']);
+Route::resource('applications', ApplicationController::class)->middleware(['auth'])->only(['index', 'show']);
 
 Route::get('/admin', function () {
     return "Halaman Admin";
