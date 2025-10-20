@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Exports\ApplicationsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\JobAppliedMail;
+use App\Notifications\NewApplicationNotification;
+use App\Models\User;
 
 class ApplicationController extends Controller
 {
@@ -37,13 +41,20 @@ class ApplicationController extends Controller
 
         $cvPath = $request->file('cv')->store('cvs', 'public');
 
-        Application::create([
+        $application = Application::create([
             'user_id' => auth()->id(),
             'job_id' => $jobId,
             'cv' => $cvPath,
         ]);
 
-        return back()->with('success', 'Lamaran berhasil dikirim!');
+        // Kirim email ke user
+        Mail::to(auth()->user()->email)->send(new JobAppliedMail($application->job, auth()->user()));
+
+        // Kirim notifikasi ke admin
+        $admin = User::where('role', 'admin')->first();
+        $admin->notify(new NewApplicationNotification($application));
+
+        return back()->with('success', 'Lamaran berhasil dikirim! Cek email Anda.');
     }
 
     /**
