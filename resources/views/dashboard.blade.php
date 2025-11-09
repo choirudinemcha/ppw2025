@@ -10,6 +10,20 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <hr class="my-6 border-gray-300/60">
+                    <div class="text-gray-800">
+                        <div>
+                            <h1 class="text-2xl font-semibold text-gray-800">
+                                Selamat datang, {{ Auth::user()->name }}
+                            </h1>
+                            <p class="text-gray-600">
+                                Anda login sebagai
+                                <span class="font-semibold capitalize text-indigo-600">
+                                    {{ Auth::user()->role }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
