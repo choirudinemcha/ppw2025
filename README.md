@@ -1,61 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+  <img src="https://laravel.com/img/logomark.min.svg" width="80" alt="Laravel Logo" />
+  <h1>Laravel Job Portal</h1>
+  <p><em>Portal Lowongan Kerja berbasis Laravel – Praktikum Pemrograman Web</em></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  <p>
+    <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-11.x-red?logo=laravel" alt="Laravel Badge" /></a>
+    <a href="https://www.php.net/"><img src="https://img.shields.io/badge/PHP-8.2-blue?logo=php" alt="PHP Badge" /></a>
+    <a href="https://www.mysql.com/"><img src="https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql" alt="MySQL Badge" /></a>
+    <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker" alt="Docker Badge" /></a>
+    <a href="https://github.com/"><img src="https://img.shields.io/badge/CI/CD-GitHub%20Actions-black?logo=github" alt="CI/CD Badge" /></a>
+  </p>
+</div>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📘 Deskripsi Proyek
+**Laravel Job Portal** adalah aplikasi berbasis web yang dikembangkan dalam rangka **Praktikum Pemrograman Web menggunakan Laravel**.
+Mahasiswa akan belajar membangun aplikasi web **real-world** mulai dari **autentikasi**, **CRUD**, **upload file**, **email notifikasi**, hingga **deployment** menggunakan Docker & CI/CD.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi ini mensimulasikan sistem rekrutmen online sederhana, di mana:
+- **Admin** dapat menambahkan dan mengelola lowongan pekerjaan.
+- **User (Pelamar)** dapat mendaftar, melamar pekerjaan, dan mengunggah CV.
+- Setiap lamaran akan mengirimkan notifikasi **email otomatis** ke admin.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🎯 Tujuan Pembelajaran
+- Memahami konsep **MVC (Model–View–Controller)** pada Laravel.
+- Mengimplementasikan fitur web modern (Auth, CRUD, Upload, API, Mail).
+- Memahami integrasi sistem menggunakan **Docker** dan **CI/CD**.
+- Melatih keterampilan debugging, dokumentasi, dan kolaborasi dengan Git.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ⚙️ Instalasi dan Konfigurasi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1️⃣ Clone Repository
+```bash
+git clone https://github.com/username/job-portal.git
+cd job-portal
+```
 
-## Laravel Sponsors
+### 2️⃣ Install Dependency
+```composer install
+npm install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3️⃣ Konfigurasi `.env`
+```
+cp .env.example .env
+```
 
-### Premium Partners
+Ubah sesuai setup lokal:
+```
+APP_NAME="Job Portal"
+APP_URL=http://localhost:8000
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=jobportal
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Contributing
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=no-reply@jobportal.test
+MAIL_FROM_NAME="Job Portal"
+```
+### 4️⃣ Jalankan Migrasi dan Key Generator
+```
+php artisan key:generate
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5️⃣ Jalankan Server
+```
+php artisan serve
+npm run dev
+```
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🧩 Struktur Folder Penting
+| Folder                  | Fungsi                              |
+| ----------------------- | ----------------------------------- |
+| `/routes/web.php`       | Menyimpan definisi route aplikasi   |
+| `/app/Http/Controllers` | Logika aplikasi (Controller)        |
+| `/app/Models`           | Representasi tabel database (Model) |
+| `/resources/views`      | Template tampilan (Blade)           |
+| `/database/migrations`  | Skrip pembuat tabel database        |
+| `.env`                  | File konfigurasi environment        |
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧱 Fitur Utama
+| Fitur                        | Deskripsi                                                 |
+| ---------------------------- | --------------------------------------------------------- |
+| 🔐 **Authentication**        | Login, register, logout dengan Laravel Breeze atau manual |
+| 💼 **Job CRUD**              | Admin dapat menambah, mengedit, dan menghapus lowongan    |
+| 🧾 **Lamaran Pekerjaan**     | User melamar dan mengunggah CV (PDF)                      |
+| 📬 **Email Notifikasi**      | Mengirim email ke admin saat ada lamaran baru             |
+| 📤 **Export & Import Excel** | Menggunakan package Laravel Excel                         |
+| 🔗 **API Laravel Sanctum**   | Akses data lowongan dan lamaran via token                 |
+| 🐳 **Docker Environment**    | Laravel, MySQL, Redis, dan Mail service dalam container   |
+| ⚙️ **CI/CD Pipeline**        | Build & Deploy otomatis dari GitHub/GitLab                |
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## GitLab
+### 🐳 Menjalankan dengan Docker
+```
+docker compose up -d
+```
+
+### Konfigurasi Container
+Pastikan `docker-compose.yml` berisi:
+```
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: jobportal
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+```
