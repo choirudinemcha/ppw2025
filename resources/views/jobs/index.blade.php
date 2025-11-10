@@ -40,7 +40,8 @@
                                             @if($job->logo)
                                                 <img src="{{ asset('storage/' . $job->logo) }}"
                                                      alt="Logo {{ $job->company }}"
-                                                     class="h-12 w-12 rounded object-cover" />
+                                                     class="h-12 w-12 rounded object-cover"
+                                                     width="100px"/>
                                             @else
                                                 <span class="text-xs text-gray-400">Tidak ada logo</span>
                                             @endif
