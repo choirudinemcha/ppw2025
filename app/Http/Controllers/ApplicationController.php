@@ -50,6 +50,8 @@ class ApplicationController extends Controller
         // Kirim email ke user
         Mail::to(auth()->user()->email)->send(new JobAppliedMail($application->job, auth()->user()));
 
+        sleep(10);
+
         // Kirim notifikasi ke admin
         $admin = User::where('role', 'admin')->first();
         $admin->notify(new NewApplicationNotification($application));
