@@ -11,6 +11,27 @@ class JobApiController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/jobs",
+     *     summary="Get all job listings",
+     *     tags={"Jobs"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of jobs",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="title", type="string"),
+     *                 @OA\Property(property="company", type="string"),
+     *                 @OA\Property(property="location", type="string")
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function index(Request $req)
     {
         // optional search & pagination
@@ -76,7 +97,7 @@ class JobApiController extends Controller
         ]);
 
         $job->update($data);
-        return response()->json(['message'=>'Updated','job'=>$job]);
+        return response()->json(['message' => 'Updated', 'job' => $job]);
     }
 
     /**
@@ -88,6 +109,6 @@ class JobApiController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
         $job->delete();
-        return response()->json(['message'=>'Deleted']);
+        return response()->json(['message' => 'Deleted']);
     }
 }
