@@ -16,7 +16,7 @@
                     <x-nav-link :href="url('/dashboard')" :active="request()->is('dashboard')" class="hover:text-yellow-300">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('/admin/jobs')" :active="request()->is('admin/jobs')" class="hover:text-yellow-300">
+                    <x-nav-link :href="url('/jobs')" :active="request()->is('jobs')" class="hover:text-yellow-300">
                         {{ __('Kelola Lowongan') }}
                     </x-nav-link>
                 @else
@@ -82,7 +82,7 @@
                 <x-responsive-nav-link :href="url('/dashboard')" :active="request()->is('dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="url('/admin/jobs')" :active="request()->is('admin/jobs')">
+                <x-responsive-nav-link :href="url('/jobs')" :active="request()->is('jobs')">
                     {{ __('Kelola Lowongan') }}
                 </x-responsive-nav-link>
             @else
