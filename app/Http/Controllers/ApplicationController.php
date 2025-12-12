@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Application;
+use App\Models\JobVacancy;
 use App\Exports\ApplicationsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
@@ -36,12 +36,12 @@ class ApplicationController extends Controller
     public function store(Request $request, $jobId)
     {
         $request->validate([
-            'cv' => 'required|mimes:pdf|max:2048',
+            'cv' => 'required',
         ]);
 
         $cvPath = $request->file('cv')->store('cvs', 'public');
 
-        $application = Application::create([
+        $application = JobVacancy::create([
             'user_id' => auth()->id(),
             'job_id' => $jobId,
             'cv' => $cvPath,
