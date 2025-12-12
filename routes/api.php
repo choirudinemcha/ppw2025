@@ -17,7 +17,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Jobs
     Route::get('/jobs', [JobApiController::class, 'index']);
-    Route::get('/jobs/{job}', [JobApiController::class, 'show']);
     Route::post('/jobs', [JobApiController::class, 'store']);
     Route::put('/jobs/{job}', [JobApiController::class, 'update']);
     Route::delete('/jobs/{job}', [JobApiController::class, 'destroy']);
