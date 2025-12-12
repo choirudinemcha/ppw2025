@@ -9,8 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="flex items-center justify-between mb-6">
+                    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <p class="text-lg font-medium text-gray-700">Kelola daftar pelamar yang tersedia.</p>
+                        @if(Auth::check() && Auth::user()->role === 'admin')
+                            <span href"{{ route('applications.export') }}"
+                               class="inline-flex items-center justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold shadow transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2">
+                                Export Excel
+                            </span>
+                        @endif
                     </div>
 
                     <div class="overflow-x-auto">
