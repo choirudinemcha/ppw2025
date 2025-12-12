@@ -11,8 +11,12 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center justify-between mb-6">
                         <p class="text-lg font-medium text-gray-700">Kelola lowongan kerja yang tersedia.</p>
+                        <form action="{{ route('jobs.index') }}" method="GET" class="flex w-full gap-2 sm:w-auto">
+                            <input type="search" name="search" value="{{ $search }}" placeholder="Cari judul atau perusahaan" class="">
+                            <button type="submit"> Cari </button>
+                        </form>
                         <a href="{{ route('jobs.create') }}"
-                           class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold shadow transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
+                            class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold shadow transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
                             Tambah Lowongan
                         </a>
                     </div>
@@ -38,28 +42,28 @@
                                         <td class="px-4 py-3 text-sm text-gray-700">{{ $job->salary }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-700">
                                             @if($job->logo)
-                                                <img src="{{ asset('storage/' . $job->logo) }}"
-                                                     alt="Logo {{ $job->company }}"
-                                                     class="h-12 w-12 rounded object-cover"
-                                                     width="100px"/>
+                                            <img src="{{ asset('storage/' . $job->logo) }}"
+                                                alt="Logo {{ $job->company }}"
+                                                class="h-12 w-12 rounded object-cover"
+                                                width="100px" />
                                             @else
-                                                <span class="text-xs text-gray-400">Tidak ada logo</span>
+                                            <span class="text-xs text-gray-400">Tidak ada logo</span>
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-700">
                                             <div class="flex items-center gap-2">
                                                 <a href="{{ route('jobs.show', $job->id) }}"
-                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                    class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
                                                     Show
                                                 </a>
                                                 {{-- Jika Admin --}}
                                                 @if(Auth::check() && Auth::user()->role === 'admin')
                                                 <a href="{{ route('applications.index', $job->id) }}"
-                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                    class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
                                                     Daftar Pelamar
                                                 </a>
                                                 <a href="{{ route('jobs.edit', $job->id) }}"
-                                                   class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                    class="inline-flex items-center rounded-md border border-transparent bg-yellow-500 px-3 py-1 text-xs font-semibold transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
                                                     Edit
                                                 </a>
                                                 <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Hapus data?');">
@@ -90,6 +94,14 @@
                                 @endforelse
                             </tbody>
                         </table>
+
+                        {{--
+                        @if($jobs->hasPages())
+                        <div class="mt-6">
+                            {{ $jobs->links() }}
+                        </div>
+                        @endif
+                        --}}
                     </div>
                 </div>
             </div>

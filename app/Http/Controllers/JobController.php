@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::all();
-        return view('jobs.index', compact('jobs'));
+        $search = $request->input('search');
+
+        $jobs = Job::paginate();
+
+        return view('jobs.index', compact('jobs', 'search'));
     }
 
     public function create()
